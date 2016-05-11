@@ -3,14 +3,14 @@ class ControllerAnalyticsYandexMetrika extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('analytics/yandex-metrika');
+		$this->load->language('analytics/yandex_metrika');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('yandex-metrika', $this->request->post, $this->request->get['store_id']);
+			$this->model_setting_setting->editSetting('yandex_metrika', $this->request->post, $this->request->get['store_id']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -56,10 +56,10 @@ class ControllerAnalyticsYandexMetrika extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('analytics/yandex-metrika', 'token=' . $this->session->data['token'], true)
+			'href' => $this->url->link('analytics/yandex_metrika', 'token=' . $this->session->data['token'], true)
 		);
 
-		$data['action'] = $this->url->link('analytics/yandex-metrika', 'token=' . $this->session->data['token'], true);
+		$data['action'] = $this->url->link('analytics/yandex_metrika', 'token=' . $this->session->data['token'], true);
 
 		$data['cancel'] = $this->url->link('extension/analytics', 'token=' . $this->session->data['token'], true);
 		
@@ -81,11 +81,11 @@ class ControllerAnalyticsYandexMetrika extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('analytics/yandex-metrika', $data));
+		$this->response->setOutput($this->load->view('analytics/yandex_metrika', $data));
 	}
 
 	protected function validate() {
-		if (!$this->user->hasPermission('modify', 'analytics/yandex-metrika')) {
+		if (!$this->user->hasPermission('modify', 'analytics/yandex_metrika')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
